@@ -75,6 +75,7 @@ letras vocales en la cadena.
 un número primo, de lo contrario retorne False.'''
 
 #Funciones útiles fuera de ejercicio
+from collections import Counter
 def reversalstring(word):
   anedac=''
   for actual in word:
@@ -249,11 +250,74 @@ def segundomasgrande(lista):
   return lista[-2]
 #Ejercicio 19
 def comparecomun(lista1, lista2):
-  if compare(lista1, lista2): return True
-  else: return False
+  return bool(set(lista1) & set(lista2))
+#Ejercicio 20
+def reverselist(lista):
+  lista.reverse()
+  return lista
+#Ejercicio 21
+def contdigitalpha(cadena):
+  digit=sum( digit.isdigit() for digit in cadena)
+  alpha=sum(digit.isalpha() for digit in cadena)
+  return digit, alpha
+#Ejercicio 22
+def sumalista(lista):
+  return sum(num for num in lista)
+#Ejercicio 23
+def elemcomun(lista):
+  try:
+    print (Counter(lista).most_common(1)[0][0])
+  except: return False
+#Ejercicio 24
+def tablas(num):
+  return {i: num*i for i in range(1,11)}
+#Ejercicio 25
+def countcadena(cadena):
+  return Counter(cadena.lower())
+#Ejercicio 26
+def uncommon(lista1,lista2):
+  return list(set(lista1)^set(lista2))
+#Ejercicio 27
+def noduplicar(lista):
+  return list(set(lista))
+#Ejercicio 28
+def sumacuadradado(num):
+  return sum(i**2 for i in range(2,num+1,2))
+#Ejercicio 29
+def promedio(lista):
+  return sum(lista) / len(lista)
+#Ejercicio 30
+def cadenamaslarga(lista):
+  return max(lista, key=len)
+#Ejercicio 31
+def es_primo(num):
+  if num < 2:
+    return False
+  for i in range(2, int(num ** 0.5) + 1):
+    if num % i == 0:
+      return False
+    return True
+def primeros_n_primos(n):
+  primos = []
+  numero = 2
+  while len(primos) < n:
+    if es_primo(numero):
+      primos.append(numero)
+      numero += 1
+  return primos
+  print(primeros_n_primos(5))
+#Ejercicio 32
+def reversestring(word):
+  return ' '.join(word.split()[::-1])
+#Ejercicio 33
+def ordentuplas(tuplas):
+  return sorted(tuplas, key=lambda x: x[-1])
+#Ejercicio 34
+def printvocales(cadena):
+  return sum(1 for car in cadena if car in 'aeiouAEIOU')
 #Llamamientos
 menu=0
-print('Ejercicios 1-10(1), ejercicios 11-20(2)')
+print('Ejercicios 1-10(1), ejercicios 11-20(2), ejercicios 21-35(3)')
 menu=input()
 if menu=='1':
   print ('Introduce un numero: ')
@@ -288,13 +352,37 @@ elif menu=='2':
   if palindromo(palabra1)==True: print('La palabra es un palindromo')
   else: print('La palabra no es un palindromo')
   fizzbuzz()
-  lista=crearlista()
-  print(f'Lista ordenada: {ordenar(lista)}')
+  lista2=crearlista()
+  print(f'Lista ordenada: {ordenar(lista2)}')
   listastr=crearlistastring()
   print('Introduce un número:')
   n=inputint()
   print(f'Los elementos de esta lista: \n{listastr} \nque son mayores que {n}: \n{mayorquen(listastr,n)}')
   print (f'El número en la lista de fibonacci de {n} es: {localfibonacci(n)}')
+  lista=crearlista()
   print (f'El número máximo de la lista es: {masgrande(lista)}')
   print(f'La suma de los digitos de {n} al cubo es {sumadigitcubo(n)}')
   print(f'El segundo numero más grande de la lista es {segundomasgrande(lista)}')
+  print(comparecomun(lista,lista2))
+  print(f'Lista {lista} en reverseo:\n{reverselist(lista)}')
+elif menu=='3':
+  print('Escribe algo: ')
+  cadena= input()
+  print (contdigitalpha(cadena))
+  lista=crearlista()
+  print (f'La suma de {lista} es {sumalista(lista)}')
+  elemcomun(lista)
+  print ('Introduce un numero: ')
+  numero=inputint()
+  print (f'La tabla del 10 de {numero} es:\n {tablas(numero)}')
+  print (f'Conteo de letras en {cadena}:\n {countcadena(cadena)}')
+  lista2=crearlista()
+  print (f'Elementos no comunes de:\n{lista}\n{lista2}\n{uncommon(lista,lista2)}')
+  print (f'Lista sin duplicados {noduplicar(lista)}')
+  print(f'Suma de los cuadrados de {numero}: {sumacuadradado(numero)}')
+  print(f'Promedio de lista: {promedio(lista)}')
+  listwords=crearlistastring()
+  print(f'La palabra más larga ha sido: {cadenamaslarga(listwords)}')
+  print(f'Cadena {cadena} en reverso: {reversestring(cadena)}')
+  print(f'Tuplas ordenadas {ordentuplas([(1,3),(2,4),(5,1)])}')
+  print(printvocales(cadena))
