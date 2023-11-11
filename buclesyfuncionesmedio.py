@@ -237,6 +237,20 @@ def mayorquen(lista,n):
 #Ejercicio 15
 def localfibonacci(num):
   return fibonacci(num)[-1]
+#Ejercicio 16
+def masgrande(lista):
+  return max(lista)
+#Ejercicio 17
+def sumadigitcubo(num):
+  return sum(int(digit)**3 for digit in str(num))
+#Ejercicio 18
+def segundomasgrande(lista):
+  lista.sort()
+  return lista[-2]
+#Ejercicio 19
+def comparecomun(lista1, lista2):
+  if compare(lista1, lista2): return True
+  else: return False
 #Llamamientos
 menu=0
 print('Ejercicios 1-10(1), ejercicios 11-20(2)')
@@ -276,8 +290,11 @@ elif menu=='2':
   fizzbuzz()
   lista=crearlista()
   print(f'Lista ordenada: {ordenar(lista)}')
-  lista=crearlistastring()
+  listastr=crearlistastring()
   print('Introduce un número:')
   n=inputint()
-  print(f'Los elementos de esta lista: \n{lista} \nque son mayores que {n}: \n{mayorquen(lista,n)}')
+  print(f'Los elementos de esta lista: \n{listastr} \nque son mayores que {n}: \n{mayorquen(listastr,n)}')
   print (f'El número en la lista de fibonacci de {n} es: {localfibonacci(n)}')
+  print (f'El número máximo de la lista es: {masgrande(lista)}')
+  print(f'La suma de los digitos de {n} al cubo es {sumadigitcubo(n)}')
+  print(f'El segundo numero más grande de la lista es {segundomasgrande(lista)}')
