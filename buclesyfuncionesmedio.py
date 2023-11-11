@@ -74,7 +74,13 @@ letras vocales en la cadena.
 35. Ejercicio: Define una función que reciba un número entero y retorne True si es
 un número primo, de lo contrario retorne False.'''
 
-#Definicion de funciones
+#Funciones útiles fuera de ejercicio
+def reversalstring(word):
+  anedac=''
+  for actual in word:
+    anedac= actual+anedac
+  return anedac
+
 def inputint():
   try: 
     num=int(input())
@@ -82,7 +88,24 @@ def inputint():
   except:
       print('\nNo se ha introducido un numero')
       return 'err'
-    
+
+def crearlista():
+  num=True
+  lista=[]
+  while num!=0:
+    print('\nIntroduce un número, 0 para terminar la lista: ')
+    num=inputint()
+    if num!='err' and num!=0: lista.append(num)
+  return lista
+def crearlistastring():
+  num=True
+  lista=[]
+  while num:
+    print('\nIntroduce un string, intro para terminar la lista: ')
+    num=input()
+    if num: lista.append(num)
+  return lista
+#Ejercicio 1
 def fibonacci(n):
   a=0
   b=1
@@ -95,9 +118,9 @@ def fibonacci(n):
       a=b
       b=c
       list.append(c)
-    print (list)
   else: print('Nada que listar')
-  
+  return list
+#Ejercicio 2
 def divisores(n):
   listadiv=[]
   divisor=n
@@ -106,13 +129,155 @@ def divisores(n):
         listadiv.append(divisor)
       divisor-=1
   print (listadiv)
-  
-
-
+#Ejercicio 3
+def unica(x):
+  flag=True
+  pos2=0
+  resultado=[]
+  for pos in range(len(x)-1):
+    flag=False
+    for valor in x:
+      if x[pos]== valor and pos != pos2: 
+        flag=True
+      pos2+=1
+    if flag==False:
+      resultado.append(x[pos])
+    pos2=0
+  return resultado
+#Ejercicio4
+def sumadigit(num1):
+  if num1!='err':
+    total=0
+    for digit in str(num1):
+      total+=int(digit)
+    return total
+  else: print('Error en la introducción de datos')
+#Ejercicio 5
+def sumavocales(cadena):
+ total=0
+ for caracter in cadena:
+    if caracter in 'aeiouAEIOU': total+=1
+ return total
+#Ejercicio 6
+def listarn(lista,n):
+  result=[]
+  count=0
+  for valor in lista:
+    result.append(valor)
+    if count == n-1: break
+    count+=1
+  return result
+#Ejercicio 7
+def calcletras(palabra):
+  mayus=0
+  minus=0
+  for letra in palabra:
+    if letra.islower(): minus+=1
+    if letra.isupper(): mayus+=1
+  result=[mayus,minus]
+  return result
+#Ejercicio 8
+def perfectnumber(num):
+  i=0
+  total=0
+  while i<num-1:
+    i+=1
+    if num%i==0:
+      total+=i
+  if total==num:
+    return True
+  else: return False
+#Ejercicio 9 
+def binario(num):
+    result=''
+    while num!=0:
+      if num%2!=0:
+        result+='1'
+      else: result+='0'
+      num=int(num/2)
+    result=reversalstring(result)
+    return result
+#Ejercicio 10
+def compare(word1, word2):
+  result=''
+  for caracter in word1:
+    if caracter in word2.lower() or caracter in word2.upper():
+      result+=caracter
+  return result
+#Ejercicio 11
+def palindromo(word):
+  reverse=reversalstring(word)
+  word=word.replace(' ', '')
+  reverse=reverse.replace(' ','')
+  print (word, reverse)
+  if word.lower() == reverse.lower(): return True
+  else: return False
+#Ejercicio 12
+def fizzbuzz():
+  i=1
+  result=[]
+  while i<=50:
+    if i%3==0 and i%5==0:
+      result.append('FizzBuzz')
+    elif i%3==0: result.append('Fizz')
+    elif i%5==0: result.append('Buzz')
+    else: result.append(i)
+    i+=1
+  return print (result)
+#Ejercicio 13
+def ordenar(lista):
+  lista.sort()
+  return lista
+#Ejercicio 14
+def mayorquen(lista,n):
+  result=[]
+  for element in lista:
+    if len(element)>n: result.append(element)
+  return result
+#Ejercicio 15
+def localfibonacci(num):
+  return fibonacci(num)[-1]
 #Llamamientos
-print ('Introduce un numero: ')
-numero=inputint()
-print('Serie de fibonacci: ')
-fibonacci(numero)
-print('Listado divisores: ')
-divisores(numero)
+menu=0
+print('Ejercicios 1-10(1), ejercicios 11-20(2)')
+menu=input()
+if menu=='1':
+  print ('Introduce un numero: ')
+  numero=inputint()
+  print(f'Serie de fibonacci: {fibonacci(numero)}')
+  print('Listado divisores: ')
+  divisores(numero)
+  lista=crearlista()
+  print (f'Los valores únicos son {unica(lista)}')
+  print('Introduce un número: ')
+  numero=inputint()
+  print(f'La suma de los digitos de {numero} es {sumadigit(numero)}')
+  print(f'Escribe una palabra: ')
+  palabra=input()
+  print(f'{palabra} contiene {sumavocales(palabra)} vocales')
+  print('Introduce un número: ')
+  numero=inputint()
+  lista=crearlista()
+  print(listarn(lista, numero))
+  calcpal=calcletras(palabra)
+  print (f'La palabra {palabra} contiene {calcpal[0]} letras mayúsculas y {calcpal[1]} minúsculas')
+  if perfectnumber(numero) is True:
+    print(f'El número {numero} es perfecto')
+  else: print(f'El número {numero} no es perfecto')
+  print (f'{numero} convertido a binario: {binario(numero)}')
+  print('Introduce otra palabra: ')
+  palabra2=input()
+  print (f'Intersección de caracteres de {palabra} y {palabra2} es {compare(palabra,palabra2)}')
+elif menu=='2':
+  print('Introduce palabra 1: ')
+  palabra1 = input()
+  if palindromo(palabra1)==True: print('La palabra es un palindromo')
+  else: print('La palabra no es un palindromo')
+  fizzbuzz()
+  lista=crearlista()
+  print(f'Lista ordenada: {ordenar(lista)}')
+  lista=crearlistastring()
+  print('Introduce un número:')
+  n=inputint()
+  print(f'Los elementos de esta lista: \n{lista} \nque son mayores que {n}: \n{mayorquen(lista,n)}')
+  print (f'El número en la lista de fibonacci de {n} es: {localfibonacci(n)}')
